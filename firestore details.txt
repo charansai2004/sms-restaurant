@@ -1,0 +1,46 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBDEkcxti966U-5SNyXLrjQysm86Z2gb9A",
+  authDomain: "projectk2-17d48.firebaseapp.com",
+  projectId: "projectk2-17d48",
+  storageBucket: "projectk2-17d48.appspot.com",
+  messagingSenderId: "786483244857",
+  appId: "1:786483244857:web:825e1b057b94b869a5c2e8",
+  measurementId: "G-YFK12HTNG8"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+for adhils database
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAAn5R2kzYYCInJ8tUqZiYHbX17o_k5R2I",
+  authDomain: "kalki-1cee9.firebaseapp.com",
+  projectId: "kalki-1cee9",
+  storageBucket: "kalki-1cee9.appspot.com",
+  messagingSenderId: "397829827005",
+  appId: "1:397829827005:web:ddf065b9eb54344bafcad4",
+  measurementId: "G-B4DFMTDKEH"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);

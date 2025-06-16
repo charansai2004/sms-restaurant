@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .cart-item button {
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .cart-item button:hover {
+            background-color: #c82333;
+        }
+        .cart-item input {
+            width: 50px;
+            text-align: center;
+        }
+        .total {
+            text-align: right;
+            margin: 20px;
+        }
+        .total button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .total button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">Cart</div>
+    <div id="cart-items"></div>
+    <div class="total">
+        <span>Total: &#8377;<span id="total-price">0.00</span></span><br>
+        <form action="/order"><button onclick="placeOrder()">Place Order</button></form>
+    </div>
+    <script>
+        function updateCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItems = document.getElementById('cart-items');
+            let totalPrice = 0;
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                totalPrice += item.price * item.quantity;
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name} - &#8377;${item.price.toFixed(2)}</span>
+                        <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity('${item.name}', this.value)">
+                        <button onclick="removeItem('${item.name}')">Remove</button>
+                    </div>
+                `;
+            });
+            document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+        }
+
+        function updateQuantity(name, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity = parseInt(quantity, 10);
+                if (item.quantity <= 0) {
+                    removeItem(name);
+                } else {
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCart();
+                }
+            }
+        }
+
+        function removeItem(name) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(i => i.name !== name);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+
+        function placeOrder() {
+            window.location.href = 'address.html';
+        }
+
+        window.onload = updateCart;
+    </script>
+</body>
+</html>

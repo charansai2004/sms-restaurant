@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .cart-summary, .order-form {
+            margin-bottom: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .cart-item span {
+            font-size: 16px;
+        }
+        .total {
+            text-align: right;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .order-form label {
+            display: block;
+            margin-top: 10px;
+        }
+        .order-form input, .order-form textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .order-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .order-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">Order Form</div>
+    <div class="container">
+        <div class="cart-summary">
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div class="total">
+                Total: &#8377;<span id="total-price">0.00</span>
+            </div>
+        </div>
+        <div class="order-form">
+            <h2>Delivery Information</h2>
+            <form id="order-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+                
+                <label for="doorno">Door No:</label>
+                <input type="text" id="doorno" name="doorno" required>
+                
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="street" required>
+                
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required>
+                
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required>
+                
+                <label for="pin">PIN Code:</label>
+                <input type="text" id="pin" name="pin" required>
+                
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function updateCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItems = document.getElementById('cart-items');
+            let totalPrice = 0;
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                totalPrice += item.price * item.quantity;
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name} - &#8377;${item.price.toFixed(2)}</span>
+                        <span>Quantity: ${item.quantity}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+        }
+
+        document.getElementById('order-form').onsubmit = async function(event) {
+            event.preventDefault();
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const deliveryInfo = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                doorno: document.getElementById('doorno').value,
+                street: document.getElementById('street').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                pin: document.getElementById('pin').value,
+            };
+
+            try {
+                console.log('Sending order data to server:', { cartData: JSON.stringify(cart), ...deliveryInfo });
+
+                const response = await fetch('/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ cartData: JSON.stringify(cart), ...deliveryInfo })
+                });
+
+                if (response.ok) {
+                    alert('Order placed successfully!');
+                    localStorage.removeItem('cart'); // Clear cart after successful order
+                } else {
+                    const text = await response.text();
+                    alert('Failed to place order: ' + text);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to place order.');
+            }
+        };
+
+        window.onload = updateCart;
+    </script>
+</body>
+</html>

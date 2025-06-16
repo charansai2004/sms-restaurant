@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            background-image: url('https://cdn.glitch.global/662016a4-4559-41ee-982a-5b5439e9b07e/Firefly%20a%20background%20image%20for%20a%20sign-up%20page%20of%20a%20SMS%20named%20restaurant%20website%20image%20composed%20of%20wh.jpg?v=1722257510275'); /* Replace with your image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: transparent; /* Consider changing to a solid color for better readability */
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 240px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 0.5px solid black; /* Uncommented */
+        }
+        .form-input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #666;
+        }
+        .form-input::placeholder {
+            color: #000; /* Placeholder color */
+        }
+        .form-button {
+            width: 95%;
+            padding: 10px;
+            background-color: transparent;
+            border: 2px solid #1A1A1A;
+            border-radius: 15px;
+            color: #3B3B3B;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+            user-select: none;
+        }
+        .form-button:hover {
+            color: #fff;
+            background-color: #1A1A1A;
+            box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+            transform: translateY(-2px);
+        }
+        .form-button:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+        .form-link {
+            text-align: center;
+            margin-top: 10px;
+            background: transparent;
+        }
+        .form-link a {
+            color: #007bff; /* Link color */
+            text-decoration: none;
+        }
+        .form-link a:hover {
+            text-decoration: underline;
+        }
+        #butcn{
+            width: 95%;
+            padding: 10px;
+            background-color: transparent;
+            border: 2px solid #1A1A1A;
+            border-radius: 15px;
+            color: #3B3B3B;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+            user-select: none;
+        }
+        #butcn:hover {
+            color: #fff;
+            background-color: #1A1A1A;
+            box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+            transform: translateY(-2px);
+}
+#button:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Sign Up</h2>
+        <form action="/signup" method="POST">
+            <input type="text" class="form-input" placeholder="Username" name="name" required>
+            <input type="email" class="form-input" placeholder="Email Address" name="email" required>
+            <input type="password" class="form-input" placeholder="Password" name="password" required>
+            <button type="submit" class="form-button">Register</button>
+        </form>
+        <div class="form-link">
+            Already have an account? <a href="/login">Login</a>
+        </div>
+    </div>
+</body>
+</html>
