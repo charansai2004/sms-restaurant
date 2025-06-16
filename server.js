@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const PORT = process.env.PORT || 2004;
 
 // Initialize Firebase
-const serviceAccount = require('./kalki-1cee9-firebase-adminsdk-gamyx-11e8925c50.json');
+const serviceAccount = require('./place your key man');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 });
